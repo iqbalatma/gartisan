@@ -1,0 +1,1 @@
+go build -o gartisan && sudo mv gartisan /usr/local/bin
