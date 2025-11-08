@@ -15,18 +15,8 @@ func MakeController(arguments []string) {
 		return
 	}
 
-	//set initiate data
-	controllerNameArgument := arguments[2]
-	controllerName := ToCamelCase(filepath.Base(controllerNameArgument))
-	fileName := filepath.Base(controllerNameArgument) + ".go"
-	pathExtension := filepath.Dir(controllerNameArgument)
-	fullPath := controllerBaseDir
-	if pathExtension != "." {
-		fullPath = filepath.Join(fullPath, pathExtension)
-	}
-	fmt.Println(pathExtension)
-	fmt.Println(fullPath)
-	MakeDirectoryIfNotExists(fullPath)
+	argument := ExtractArgument(arguments[2])
+	MakeDirectoryIfNotExists(argument.FullPath)
 
 	//get template file
 	templateFile, err := template.ParseFiles(filepath.Join("templates", "controller.tmpl"))
@@ -38,7 +28,7 @@ func MakeController(arguments []string) {
 	//map variable for template file
 	data := map[string]string{
 		"package_name":    "controller",
-		"controller_name": controllerName,
+		"controller_name": argument.Name,
 	}
 
 	//write executed template file into buffer
@@ -49,12 +39,12 @@ func MakeController(arguments []string) {
 	}
 
 	//write buffer into file
-	err = SafeCreateFile(filepath.Join(fullPath, fileName), buffer.String())
+	err = SafeCreateFile(filepath.Join(argument.FullPath, argument.FileName), buffer.String())
 	if err != nil {
 		fmt.Printf(ANSI_RED+"Failed create controller %s \n", err.Error())
 		return
 	}
 
-	fmt.Printf(ANSI_GREEN+"Successfully create controller %s \n", controllerName)
+	fmt.Printf(ANSI_GREEN+"Successfully create controller %s \n", argument.Name)
 	fmt.Printf(ANSI_RESET)
 }
