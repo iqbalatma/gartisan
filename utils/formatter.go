@@ -27,9 +27,9 @@ func ToCamelCase(source string) string {
 	return result
 }
 
-func ExtractArgument(argument string) *ArgumentInfo {
+func ExtractArgument(argument string, baseDir string) *ArgumentInfo {
 	pathExtension := filepath.Dir(argument)
-	fullPath := ""
+	fullPath := baseDir
 	if pathExtension != "." {
 		fullPath = filepath.Join(fullPath, pathExtension)
 	}

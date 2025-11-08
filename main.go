@@ -19,6 +19,13 @@ func main() {
 	switch command {
 	case "make:controller":
 		utils.MakeController(arguments)
+	case "make:model":
+		utils.MakeModel(arguments)
+	case "make:service":
+		utils.MakeService(arguments)
+	case "make:repository":
+		utils.MakeRepository(arguments)
+
 	default:
 		fmt.Printf(utils.ANSI_RED+"Command %s not found\n", command)
 	}
