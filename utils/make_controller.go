@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"path/filepath"
 	"text/template"
+
+	"github.com/iqbalatma/gartisan/templates"
 )
 
 var controllerBaseDir = filepath.Join("app", "controller")
@@ -18,24 +20,24 @@ func MakeController(arguments []string) {
 	argument := ExtractArgument(arguments[2], controllerBaseDir)
 	MakeDirectoryIfNotExists(argument.FullPath)
 
-	//get template file
-	templateFile, err := template.ParseFiles(filepath.Join("templates", "controller.tmpl"))
-	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
-		return
-	}
-
 	//map variable for template file
 	data := map[string]string{
 		"package_name":    "controller",
 		"controller_name": argument.Name,
 	}
 
-	//write executed template file into buffer
-	var buffer bytes.Buffer
-	err = templateFile.Execute(&buffer, data)
+	tmpl, err := template.New("controller").Parse(templates.ControllerTmpl)
 	if err != nil {
 		fmt.Println(ANSI_RED + err.Error())
+		return
+	}
+
+	//write executed template file into buffer
+	var buffer bytes.Buffer
+	err = tmpl.Execute(&buffer, data)
+	if err != nil {
+		fmt.Println(ANSI_RED + err.Error())
+		return
 	}
 
 	//write buffer into file

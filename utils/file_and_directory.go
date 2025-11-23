@@ -6,10 +6,6 @@ import (
 )
 
 func SafeCreateFile(path string, content string) error {
-	// os.O_EXCL: memastikan operasi gagal jika file sudah ada
-	// os.O_CREATE: membuat file jika tidak ada
-	// 0644: izin standar file
-
 	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
 	if err != nil {
 		return err

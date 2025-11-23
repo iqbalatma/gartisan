@@ -20,6 +20,7 @@ func main() {
 	case "make:controller":
 		utils.MakeController(arguments)
 	case "make:model":
+
 		utils.MakeModel(arguments)
 	case "make:service":
 		utils.MakeService(arguments)

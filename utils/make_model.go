@@ -3,26 +3,22 @@ package utils
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"path/filepath"
-	template2 "text/template"
+
+	"github.com/iqbalatma/gartisan/templates"
 )
 
 var modelBaseDir = filepath.Join("app", "model")
 
 func MakeModel(arguments []string) {
 	if len(arguments) < 3 {
-		fmt.Println(ANSI_RED + "Missing required argument. You need to add controller name as argument. e.g UserController ")
+		fmt.Println(ANSI_RED + "Missing required argument. You need to add model name as argument. e.g User ")
 		return
 	}
 
 	argument := ExtractArgument(arguments[2], modelBaseDir)
 	MakeDirectoryIfNotExists(argument.FullPath)
-
-	templateFile, err := template2.ParseFiles(filepath.Join("templates", "model.tmpl"))
-	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
-		return
-	}
 
 	//map variable for template file
 	data := map[string]string{
@@ -30,10 +26,17 @@ func MakeModel(arguments []string) {
 		"model_name":   argument.Name,
 	}
 
-	var buffer bytes.Buffer
-	err = templateFile.Execute(&buffer, data)
+	tmpl, err := template.New("model").Parse(templates.ModelTmpl)
 	if err != nil {
 		fmt.Println(ANSI_RED + err.Error())
+		return
+	}
+
+	var buffer bytes.Buffer
+	err = tmpl.Execute(&buffer, data)
+	if err != nil {
+		fmt.Println(ANSI_RED + err.Error())
+		return
 	}
 
 	//write buffer into file

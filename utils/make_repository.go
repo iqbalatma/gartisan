@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"path/filepath"
 	"text/template"
+
+	"github.com/iqbalatma/gartisan/templates"
 )
 
 var repositoryBaseDir = filepath.Join("app", "repository")
@@ -18,23 +20,24 @@ func MakeRepository(arguments []string) {
 	argument := ExtractArgument(arguments[2], repositoryBaseDir)
 	MakeDirectoryIfNotExists(argument.FullPath)
 
-	//get template file
-	templateFile, err := template.ParseFiles(filepath.Join("templates", "repository.tmpl"))
-	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
-		return
-	}
-
 	//map variable for template file
 	data := map[string]string{
 		"package_name":    "repository",
 		"repository_name": argument.Name,
 	}
 
-	var buffer bytes.Buffer
-	err = templateFile.Execute(&buffer, data)
+	//get template file
+	tmpl, err := template.New("repository").Parse(templates.RepositoryTmpl)
 	if err != nil {
 		fmt.Println(ANSI_RED + err.Error())
+		return
+	}
+
+	var buffer bytes.Buffer
+	err = tmpl.Execute(&buffer, data)
+	if err != nil {
+		fmt.Println(ANSI_RED + err.Error())
+		return
 	}
 
 	//write buffer into file

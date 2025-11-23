@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"path/filepath"
 	"text/template"
+
+	"github.com/iqbalatma/gartisan/templates"
 )
 
 var serviceBaseDir = filepath.Join("app", "service")
@@ -18,23 +20,23 @@ func MakeService(arguments []string) {
 	argument := ExtractArgument(arguments[2], serviceBaseDir)
 	MakeDirectoryIfNotExists(argument.FullPath)
 
-	//get template file
-	templateFile, err := template.ParseFiles(filepath.Join("templates", "service.tmpl"))
-	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
-		return
-	}
-
 	//map variable for template file
 	data := map[string]string{
 		"package_name": "service",
 		"service_name": argument.Name,
 	}
 
-	var buffer bytes.Buffer
-	err = templateFile.Execute(&buffer, data)
+	tmpl, err := template.New("service").Parse(templates.ServiceTmpl)
 	if err != nil {
 		fmt.Println(ANSI_RED + err.Error())
+		return
+	}
+
+	var buffer bytes.Buffer
+	err = tmpl.Execute(&buffer, data)
+	if err != nil {
+		fmt.Println(ANSI_RED + err.Error())
+		return
 	}
 
 	//write buffer into file
