@@ -15,6 +15,7 @@ var utilsBaseDir = "utils"
 func GenerateUtils(arguments []string) {
 	fmt.Println("Generating utils")
 	InstallBcrypt()
+	GenerateEnums(arguments)
 
 	if err := os.MkdirAll(utilsBaseDir, os.ModePerm); err != nil {
 		fmt.Println("Failed to create utils directory")
@@ -50,7 +51,7 @@ func GenerateUtils(arguments []string) {
 		fmt.Println("Failed writing http_response.go:", err)
 		return
 	}
-	
+
 	GoModTidy()
 	fmt.Println("Generate utils successfully")
 }

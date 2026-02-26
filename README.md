@@ -30,3 +30,13 @@ gartisan make:service user_service
 ```shell
 gartisan make:service user_repository 
 ```
+
+### Generate utils
+```shell
+gartisan generate:utils 
+```
+
+### Generate enums
+```shell
+gartisan generate:enums 
+```
