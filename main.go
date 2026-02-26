@@ -4,8 +4,18 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/iqbalatma/gartisan/command"
 	"github.com/iqbalatma/gartisan/utils"
 )
+
+var commands = map[string]func([]string){
+	"make:controller": command.MakeController,
+	"make:model":      command.MakeModel,
+	"make:service":    command.MakeService,
+	"make:repository": command.MakeRepository,
+	"generate:utils":  command.GenerateUtils,
+	"generate:enums":  command.GenerateEnums,
+}
 
 func main() {
 	arguments := os.Args
@@ -14,20 +24,11 @@ func main() {
 		utils.PrintIntroduction()
 		return
 	}
-	command := arguments[1]
+	cmdName := arguments[1]
 
-	switch command {
-	case "make:controller":
-		utils.MakeController(arguments)
-	case "make:model":
-
-		utils.MakeModel(arguments)
-	case "make:service":
-		utils.MakeService(arguments)
-	case "make:repository":
-		utils.MakeRepository(arguments)
-
-	default:
-		fmt.Printf(utils.ANSI_RED+"Command %s not found\n", command)
+	if cmd, exists := commands[cmdName]; exists {
+		cmd(arguments)
+	} else {
+		fmt.Printf(utils.ANSI_RED+"Command %s not found\n", cmdName)
 	}
 }

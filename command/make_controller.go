@@ -1,4 +1,4 @@
-package utils
+package command
 
 import (
 	"bytes"
@@ -7,18 +7,19 @@ import (
 	"text/template"
 
 	"github.com/iqbalatma/gartisan/templates"
+	"github.com/iqbalatma/gartisan/utils"
 )
 
 var controllerBaseDir = filepath.Join("app", "controller")
 
 func MakeController(arguments []string) {
 	if len(arguments) < 3 {
-		fmt.Println(ANSI_RED + "Missing required argument. You need to add controller name as argument. e.g UserController ")
+		fmt.Println(utils.ANSI_RED + "Missing required argument. You need to add controller name as argument. e.g UserController ")
 		return
 	}
 
-	argument := ExtractArgument(arguments[2], controllerBaseDir)
-	MakeDirectoryIfNotExists(argument.FullPath)
+	argument := utils.ExtractArgument(arguments[2], controllerBaseDir)
+	utils.MakeDirectoryIfNotExists(argument.FullPath)
 
 	//map variable for template file
 	data := map[string]string{
@@ -28,7 +29,7 @@ func MakeController(arguments []string) {
 
 	tmpl, err := template.New("controller").Parse(templates.ControllerTmpl)
 	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
+		fmt.Println(utils.ANSI_RED + err.Error())
 		return
 	}
 
@@ -36,17 +37,17 @@ func MakeController(arguments []string) {
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, data)
 	if err != nil {
-		fmt.Println(ANSI_RED + err.Error())
+		fmt.Println(utils.ANSI_RED + err.Error())
 		return
 	}
 
 	//write buffer into file
-	err = SafeCreateFile(filepath.Join(argument.FullPath, argument.FileName), buffer.String())
+	err = utils.SafeCreateFile(filepath.Join(argument.FullPath, argument.FileName), buffer.String())
 	if err != nil {
-		fmt.Printf(ANSI_RED+"Failed create controller %s \n", err.Error())
+		fmt.Printf(utils.ANSI_RED+"Failed create controller %s \n", err.Error())
 		return
 	}
 
-	fmt.Printf(ANSI_GREEN+"Successfully create controller %s \n", argument.Name)
-	fmt.Printf(ANSI_RESET)
+	fmt.Printf(utils.ANSI_GREEN+"Successfully create controller %s \n", argument.Name)
+	fmt.Printf(utils.ANSI_RESET)
 }
