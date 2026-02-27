@@ -14,11 +14,14 @@ var RepositoryTmpl string
 //go:embed service.tmpl
 var ServiceTmpl string
 
-//go:embed hashing.tmpl
+//go:embed utils/hashing.tmpl
 var HashingTmpl string
 
 //go:embed response_code.tmpl
 var ResponseCodeTmpl string
 
-//go:embed http_response.tmpl
+//go:embed utils/http_response.tmpl
 var HttpResponseTmpl string
+
+//go:embed utils/paginate.tmpl
+var PaginationTmpl string
