@@ -25,3 +25,9 @@ var HttpResponseTmpl string
 
 //go:embed utils/paginate.tmpl
 var PaginationTmpl string
+
+//go:embed config/config.tmpl
+var ConfigTmpl string
+
+//go:embed config/database.tmpl
+var DatabaseTmpl string

@@ -9,12 +9,13 @@ import (
 )
 
 var commands = map[string]func([]string){
-	"make:controller": command.MakeController,
-	"make:model":      command.MakeModel,
-	"make:service":    command.MakeService,
-	"make:repository": command.MakeRepository,
-	"generate:utils":  command.GenerateUtils,
-	"generate:enums":  command.GenerateEnums,
+	"make:controller":  command.MakeController,
+	"make:model":       command.MakeModel,
+	"make:service":     command.MakeService,
+	"make:repository":  command.MakeRepository,
+	"generate:utils":   command.GenerateUtils,
+	"generate:enums":   command.GenerateEnums,
+	"generate:configs": command.GenerateConfigs,
 }
 
 func main() {
