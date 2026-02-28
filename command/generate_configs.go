@@ -14,6 +14,7 @@ func GenerateConfigs(arguments []string) {
 	InstallGodotenv()
 	InstallGorm()
 	InstallMysql()
+	InstallLogrus()
 	if err := os.MkdirAll(configBaseDir, os.ModePerm); err != nil {
 		fmt.Println("Failed to create config directory")
 		return
@@ -21,6 +22,7 @@ func GenerateConfigs(arguments []string) {
 
 	writeConfig()
 	writeDatabase()
+	writeLogger()
 	fmt.Println("Generate config successfully")
 }
 
@@ -38,6 +40,15 @@ func writeDatabase() {
 	err := os.WriteFile(configBaseDir+"/database.go", []byte(templates.DatabaseTmpl), 0644)
 	if err != nil {
 		fmt.Println("Failed writing database.go:", err)
+		return
+	}
+}
+
+func writeLogger() {
+	fmt.Println("Writing logger")
+	err := os.WriteFile(configBaseDir+"/logger.go", []byte(templates.LoggerTmpl), 0644)
+	if err != nil {
+		fmt.Println("Failed writing logger.go:", err)
 		return
 	}
 }

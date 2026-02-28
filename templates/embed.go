@@ -31,3 +31,6 @@ var ConfigTmpl string
 
 //go:embed config/database.tmpl
 var DatabaseTmpl string
+
+//go:embed config/logger.tmpl
+var LoggerTmpl string
