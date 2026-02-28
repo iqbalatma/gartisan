@@ -79,7 +79,7 @@ func writePaginate(templatePlaceholder TemplatePlaceholder) {
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, templatePlaceholder)
 	if err != nil {
-		fmt.Println("Failed writing http_response.go:", err)
+		fmt.Println("Failed writing paginate.go:", err)
 	}
 	err = os.WriteFile(utilsBaseDir+"/paginate.go", buffer.Bytes(), 0644)
 	if err != nil {

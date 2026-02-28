@@ -34,3 +34,9 @@ var DatabaseTmpl string
 
 //go:embed config/logger.tmpl
 var LoggerTmpl string
+
+//go:embed validator/validator.tmpl
+var ValidatorTmpl string
+
+//go:embed validator/register_unique_column_validator.tmpl
+var RegisterUniqueColumnValidatorTmpl string
