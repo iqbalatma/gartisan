@@ -28,7 +28,7 @@ func Paginate[T any](c *gin.Context, db *gorm.DB, out *[]T) (*PaginationMeta, er
 	if perPage > MaximumPerPage {
 		return nil, NewHttpError(
 			"Invalid query parameter",
-			enum.ERR_INVALID_QUERY_PARAMETER,
+			enums.ERR_INVALID_QUERY_PARAMETER,
 			nil,
 		)
 	}

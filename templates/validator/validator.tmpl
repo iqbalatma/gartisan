@@ -52,11 +52,11 @@ func BindAndValidate(c *gin.Context, obj interface{}) bool {
 				errorMap[field] = append(errorMap[field], msg)
 			}
 
-			c.JSON(http.StatusBadRequest, utils.NewHttpError("Validation error", enum.ERR_BAD_REQUEST, &errorMap))
+			c.JSON(http.StatusBadRequest, utils.NewHttpError("Validation error", enums.ERR_BAD_REQUEST, &errorMap))
 			return false
 		}
 
-		c.JSON(http.StatusBadRequest, utils.NewHttpError(err.Error(), enum.ERR_BAD_REQUEST, nil))
+		c.JSON(http.StatusBadRequest, utils.NewHttpError(err.Error(), enums.ERR_BAD_REQUEST, nil))
 
 		return false
 	}

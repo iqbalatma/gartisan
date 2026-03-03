@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"{{.ModuleName}}/app/enum"
+	"{{.ModuleName}}/app/enums"
 	"{{.ModuleName}}/utils"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +20,7 @@ func ErrorHandleWrapper(h func(*gin.Context) error) gin.HandlerFunc {
 
 func RegisterRoute(router *gin.Engine) {
 	router.NoRoute(func(c *gin.Context) {
-		c.JSON(http.StatusNotFound, utils.NewHttpError("Route does not exist", enum.ERR_ROUTE_NOT_FOUND, nil))
+		c.JSON(http.StatusNotFound, utils.NewHttpError("Route does not exist", enums.ERR_ROUTE_NOT_FOUND, nil))
 	})
 
 	router.Group("/api")

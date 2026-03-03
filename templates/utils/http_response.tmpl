@@ -7,7 +7,7 @@ import (
 )
 
 type BaseHttpResponse struct {
-	Code       enum.ResponseCode `json:"code"`
+	Code       enums.ResponseCode `json:"code"`
 	Message    string            `json:"message"`
 	StatusCode int               `json:"status_code"`
 	Timestamp  time.Time         `json:"timestamp"`
@@ -50,16 +50,16 @@ type PaginationMeta struct {
 func NewHttpSuccess(message string, payload *Payload) *HTTPResponse {
 	return &HTTPResponse{
 		BaseHttpResponse: BaseHttpResponse{
-			Code:       enum.SUCCESS,
+			Code:       enums.SUCCESS,
 			Timestamp:  time.Now(),
-			StatusCode: enum.SUCCESS.HTTPStatus(),
+			StatusCode: enums.SUCCESS.HTTPStatus(),
 			Message:    message,
 			Payload:    payload,
 		},
 	}
 }
 
-func NewHttpError(message string, code enum.ResponseCode, errors *map[string][]string) *HTTPError {
+func NewHttpError(message string, code enums.ResponseCode, errors *map[string][]string) *HTTPError {
 	return &HTTPError{
 		BaseHttpResponse: BaseHttpResponse{
 			Code:       code,
