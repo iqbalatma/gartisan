@@ -18,10 +18,5 @@ func GenerateEnums(arguments []string) {
 		return
 	}
 
-	err := os.WriteFile(enumBaseDir+"/response_code.go", []byte(templates.ResponseCodeTmpl), 0644)
-	if err != nil {
-		fmt.Println("Failed writing response_code.go:", err)
-		return
-	}
-	fmt.Println("Generate enums successfully")
+	GenerateStatic(filepath.Join(enumBaseDir, "response_code.go"), templates.ResponseCodeTmpl)
 }

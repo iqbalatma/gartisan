@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/iqbalatma/gartisan/templates"
 )
@@ -20,35 +21,8 @@ func GenerateConfigs(arguments []string) {
 		return
 	}
 
-	writeConfig()
-	writeDatabase()
-	writeLogger()
+	GenerateStatic(filepath.Join(configBaseDir, "config.go"), templates.ConfigTmpl)
+	GenerateStatic(filepath.Join(configBaseDir, "database.go"), templates.DatabaseTmpl)
+	GenerateStatic(filepath.Join(configBaseDir, "logger.go"), templates.LoggerTmpl)
 	fmt.Println("Generate config successfully")
-}
-
-func writeConfig() {
-	fmt.Println("Writing config")
-	err := os.WriteFile(configBaseDir+"/config.go", []byte(templates.ConfigTmpl), 0644)
-	if err != nil {
-		fmt.Println("Failed writing config.go:", err)
-		return
-	}
-}
-
-func writeDatabase() {
-	fmt.Println("Writing database")
-	err := os.WriteFile(configBaseDir+"/database.go", []byte(templates.DatabaseTmpl), 0644)
-	if err != nil {
-		fmt.Println("Failed writing database.go:", err)
-		return
-	}
-}
-
-func writeLogger() {
-	fmt.Println("Writing logger")
-	err := os.WriteFile(configBaseDir+"/logger.go", []byte(templates.LoggerTmpl), 0644)
-	if err != nil {
-		fmt.Println("Failed writing logger.go:", err)
-		return
-	}
 }
