@@ -17,6 +17,7 @@ var commands = map[string]func([]string){
 	"generate:enums":      command.GenerateEnums,
 	"generate:configs":    command.GenerateConfigs,
 	"generate:validators": command.GenerateValidators,
+	"generate":            command.GenerateAll,
 }
 
 func main() {
