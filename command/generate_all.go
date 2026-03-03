@@ -5,4 +5,5 @@ func GenerateAll(arguments []string) {
 	GenerateEnums(arguments)
 	GenerateConfigs(arguments)
 	GenerateValidators(arguments)
+	GenerateErrors(arguments)
 }

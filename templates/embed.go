@@ -43,3 +43,6 @@ var ValidatorTmpl string
 
 //go:embed validator/register_unique_column_validator.tmpl
 var RegisterUniqueColumnValidatorTmpl string
+
+//go:embed errors/exception.tmpl
+var ExceptionTmpl string
