@@ -17,6 +17,9 @@ var ServiceTmpl string
 //go:embed utils/hashing.tmpl
 var HashingTmpl string
 
+//go:embed utils/base_model.tmpl
+var BaseModelTmpl string
+
 //go:embed response_code.tmpl
 var ResponseCodeTmpl string
 

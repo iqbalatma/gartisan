@@ -1,0 +1,25 @@
+package model
+
+import (
+	"time"
+
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
+
+type BaseModel struct {
+	ID        uuid.UUID `json:"id" gorm:"column:id;primary_key;type:uuid;"`
+	CreatedAt time.Time `json:"created_at" gorm:"column:created_at;autoCreateTime;"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at;autoUpdateTime;autoUpdateTime"`
+}
+
+func (baseModel *BaseModel) GenerateUUID() {
+	if baseModel.ID == uuid.Nil {
+		baseModel.ID = uuid.New()
+	}
+}
+
+func (baseModel *BaseModel) BeforeCreate(tx *gorm.DB) error {
+	baseModel.GenerateUUID()
+	return nil
+}

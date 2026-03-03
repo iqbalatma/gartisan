@@ -43,6 +43,10 @@ func InstallBcrypt() {
 	Install("golang.org/x/crypto/bcrypt")
 }
 
+func InstallUUID() {
+	Install("github.com/google/uuid")
+}
+
 func GoModTidy() {
 	fmt.Println("Running go mod tidy")
 

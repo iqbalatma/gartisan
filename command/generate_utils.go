@@ -9,11 +9,13 @@ import (
 )
 
 var utilsBaseDir = "utils"
+var modelsBaseDir = filepath.Join("app", "models")
 
 func GenerateUtils(arguments []string) {
 	fmt.Println("Generating utils")
 	InstallBcrypt()
 	InstallGin()
+	InstallUUID()
 	GenerateEnums(arguments)
 
 	//create directory
@@ -23,6 +25,7 @@ func GenerateUtils(arguments []string) {
 	}
 
 	GenerateStatic(filepath.Join(utilsBaseDir, "hashing.go"), templates.HashingTmpl)
+	GenerateStatic(filepath.Join(modelsBaseDir, "base_model.go"), templates.BaseModelTmpl)
 	GenerateWithModuleName(filepath.Join(utilsBaseDir, "http_response.go"), templates.HttpResponseTmpl)
 	GenerateWithModuleName(filepath.Join(utilsBaseDir, "paginate.go"), templates.PaginationTmpl)
 
