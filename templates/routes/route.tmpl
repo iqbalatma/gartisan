@@ -1,0 +1,27 @@
+package routes
+
+import (
+	"net/http"
+
+	"{{.ModuleName}}/app/enum"
+	"{{.ModuleName}}/utils"
+
+	"github.com/gin-gonic/gin"
+)
+
+func ErrorHandleWrapper(h func(*gin.Context) error) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if err := h(c); err != nil {
+			c.Error(err)
+			c.Abort()
+		}
+	}
+}
+
+func RegisterRoute(router *gin.Engine) {
+	router.NoRoute(func(c *gin.Context) {
+		c.JSON(http.StatusNotFound, utils.NewHttpError("Route does not exist", enum.ERR_ROUTE_NOT_FOUND, nil))
+	})
+
+	router.Group("/api")
+}

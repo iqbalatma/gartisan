@@ -46,3 +46,6 @@ var RegisterUniqueColumnValidatorTmpl string
 
 //go:embed errors/exception.tmpl
 var ExceptionTmpl string
+
+//go:embed routes/route.tmpl
+var RouteTmpl string

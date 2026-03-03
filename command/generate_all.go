@@ -6,4 +6,6 @@ func GenerateAll(arguments []string) {
 	GenerateConfigs(arguments)
 	GenerateValidators(arguments)
 	GenerateErrors(arguments)
+	GenerateRoutes(arguments)
+
 }

@@ -18,6 +18,7 @@ var commands = map[string]func([]string){
 	"generate:configs":    command.GenerateConfigs,
 	"generate:validators": command.GenerateValidators,
 	"generate:errors":     command.GenerateErrors,
+	"generate:routes":     command.GenerateRoutes,
 	"generate":            command.GenerateAll,
 }
 
