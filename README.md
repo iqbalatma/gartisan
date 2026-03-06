@@ -40,3 +40,30 @@ gartisan generate:utils
 ```shell
 gartisan generate:enums 
 ```
+
+### Generate configs
+```shell
+gartisan generate:configs 
+```
+
+### Generate validators
+```shell
+gartisan generate:validators 
+```
+
+### Generate errors
+```shell
+gartisan generate:errors 
+```
+
+
+### Generate route
+```shell
+gartisan generate:routes 
+```
+
+
+### Generate all
+```shell
+gartisan generate 
+```
