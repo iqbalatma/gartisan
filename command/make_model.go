@@ -10,7 +10,7 @@ import (
 	"github.com/iqbalatma/gartisan/utils"
 )
 
-var modelBaseDir = filepath.Join("app", "model")
+var modelBaseDir = filepath.Join("app", "models")
 
 func MakeModel(arguments []string) {
 	if len(arguments) < 3 {
