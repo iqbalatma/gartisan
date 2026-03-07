@@ -23,7 +23,7 @@ func MakeModel(arguments []string) {
 
 	//map variable for template file
 	data := map[string]string{
-		"package_name": "model",
+		"package_name": "models",
 		"model_name":   argument.Name,
 	}
 
