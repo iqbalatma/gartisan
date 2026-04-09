@@ -13,6 +13,7 @@ var commands = map[string]func([]string){
 	"make:model":          command.MakeModel,
 	"make:service":        command.MakeService,
 	"make:repository":     command.MakeRepository,
+	"make:migration":      command.MakeMigration,
 	"generate:utils":      command.GenerateUtils,
 	"generate:enums":      command.GenerateEnums,
 	"generate:configs":    command.GenerateConfigs,
@@ -20,6 +21,9 @@ var commands = map[string]func([]string){
 	"generate:errors":     command.GenerateErrors,
 	"generate:routes":     command.GenerateRoutes,
 	"generate":            command.GenerateAll,
+	"migrate":             command.MigrateUp,
+	"migrate:up":          command.MigrateUp,
+	"migrate:down":        command.MigrateDown,
 }
 
 func main() {
